@@ -5,7 +5,7 @@ import RestaurantDetailsScreen from "./src/screens/RestaurantDetailsScreen";
 export default function App() {
   return (
     <View style={styles.container}>
-      <HomeScreen />
+      {/* <HomeScreen /> */}
       <RestaurantDetailsScreen />
       <StatusBar style="auto" />
     </View>
@@ -18,6 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    padding: 10,
   },
 });
