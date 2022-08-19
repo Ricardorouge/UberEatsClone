@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import restaurants from "../../../assets/data/restaurants.json";
 import { useState } from "react";
 import CartItems from "../../components/CartItems";
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   subtitle:{
     fontWeight:'bold',
     marginTop:20,
-    fontSize:19
+    fontSize:19,
   },
 });
 
