@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Pressable, ActivityIndicator, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { useState, useEffect } from "react";
@@ -6,14 +13,13 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { DataStore } from "aws-amplify";
 import { Dish } from "../../models";
 
-
 const DishDetailsScreen = (props) => {
   const [quantity, setQuantity] = useState(1);
-  const [dish,setDish] = useState(null)
+  const [dish, setDish] = useState(null);
 
-  const navigation= useNavigation()
-  const route = useRoute()
-  const id = route.params.id
+  const navigation = useNavigation();
+  const route = useRoute();
+  const id = route.params.id;
 
   const addItem = () => {
     setQuantity(quantity + 1);
@@ -22,22 +28,24 @@ const DishDetailsScreen = (props) => {
     quantity === 1 ? setQuantity(1) : setQuantity(quantity - 1);
   };
 
-  const price =()=>{
-    return (dish.price * quantity).toFixed(2)
-  }
+  const price = () => {
+    return (dish.price * quantity).toFixed(2);
+  };
 
-  useEffect(()=>{if(id)
-    {DataStore.query(Dish,id).then(setDish)}
-  },[id])
+  useEffect(() => {
+    if (id) {
+      DataStore.query(Dish, id).then(setDish);
+    }
+  }, [id]);
 
-  if(!dish){
+  if (!dish) {
     return (
       <ActivityIndicator
         size={"large"}
         padding={50}
         marginTop={(Dimensions.get("screen").height * 2) / 5}
       />
-    )
+    );
   }
 
   return (
@@ -60,8 +68,13 @@ const DishDetailsScreen = (props) => {
           onPress={() => addItem()}
         />
       </View>
-      <Pressable  onPress ={()=>navigation.navigate('Cart')} style = {styles.button}>
-        <Text style={styles.buttonText}>Add {quantity} to cart (${price()})</Text>
+      <Pressable
+        onPress={() => navigation.navigate("Cart")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>
+          Add {quantity} to cart (${price()})
+        </Text>
       </Pressable>
     </View>
   );
@@ -96,17 +109,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginHorizontal: 20,
   },
-  button:{
-    backgroundColor:'black',
-    marginTop:'auto',
-    padding:20,
-    alignItems:'center',
-
+  button: {
+    backgroundColor: "black",
+    marginTop: "auto",
+    padding: 20,
+    alignItems: "center",
   },
-  buttonText:{
-    color:'white',
-    fontWeight:'600',
-    fontSize:20,
+  buttonText: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 20,
   },
 });
 

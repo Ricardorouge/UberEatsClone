@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 import RootNavigator from "./src/navigation";
 import { NavigationContainer } from "@react-navigation/native";
+import AuthContextProvider from "./src/contexts/AuthContext";
 
 import Amplify from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
@@ -14,7 +15,9 @@ Amplify.configure({ ...config, Analytics: { disabled: true } });
 function App() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <AuthContextProvider>
+        <RootNavigator />
+      </AuthContextProvider>
       <StatusBar style="auto" />
     </NavigationContainer>
   );

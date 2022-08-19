@@ -8,14 +8,21 @@ import DishDetailsScreen from "../screens/DishDetailsScreen";
 import Cart from "../screens/CartScreen";
 import OrderScreen from "../screens/OrdersScreen";
 import OrderDetails from "../screens/OrderDetails";
-import ProfileScreen from '../screens/ProfileScreen'
+import ProfileScreen from "../screens/ProfileScreen";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
+  const { dbUser } = useAuthContext();
+
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name="HomeTabs" component={HomeTabs} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {dbUser ? (
+        <Stack.Screen name="HomeTabs" component={HomeTabs} />
+      ) : (
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      )}
     </Stack.Navigator>
   );
 };
@@ -64,8 +71,12 @@ const HomeStack = createNativeStackNavigator();
 const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Restaurants" component={HomeScreen}/>
-      <HomeStack.Screen name="Restaurant" component={RestaurantDetailsScreen} options={{headerShown:false}}/>
+      <HomeStack.Screen name="Restaurants" component={HomeScreen} />
+      <HomeStack.Screen
+        name="Restaurant"
+        component={RestaurantDetailsScreen}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen name="Dish" component={DishDetailsScreen} />
       <HomeStack.Screen name="Cart" component={Cart} />
     </HomeStack.Navigator>
@@ -78,7 +89,6 @@ const OrderStackNavigator = () => {
     <OrderStack.Navigator>
       <OrderStack.Screen name="Orders" component={OrderScreen} />
       <OrderStack.Screen name="Order" component={OrderDetails} />
-   
     </OrderStack.Navigator>
   );
 };

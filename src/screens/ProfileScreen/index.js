@@ -1,15 +1,54 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
+import { User } from "../../models";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [lat, setLat] = useState("0");
-  const [lng, setLng] = useState("0");
+  const {dbUser} = useAuthContext()
 
-  const onSave = () => {};
+  const [name, setName] = useState(dbUser?._W?.name || '');
+  const [address, setAddress] = useState(dbUser?._W?.address || '');
+  const [lat, setLat] = useState(dbUser?._W.lat || '');
+  const [lng, setLng] = useState(dbUser?._W.lng || '');
+
+  const {sub, setDbUser} = useAuthContext()
+  
+  const navigation = useNavigation()
+  
+  const onSave = async () => {
+
+    if(dbUser){
+      await updateUser()
+    }else{
+      await createUser()
+    }
+    navigation.goBack()
+  };
+  const updateUser= async ()=>{
+    const user = await DataStore.save(
+      User.copyOf(dbUser,(updated)=>{
+        updated.name = name
+        updated.address = address
+        updated.lat = parseFloat(lat)
+        updated.lng = parseFloat(lng)
+      })
+    )
+  console.log(user)
+    // setDbUser(user)
+  }
+
+  const createUser =async ()=>{
+    try{
+      const user = DataStore.save(new User({name,address,lat:parseFloat(lat),lng:parseFloat(lng),sub}))
+      setDbUser(user)
+
+    }catch(error){
+      Alert.alert('Error',error.message)
+    }
+  }
 
   return (
     <SafeAreaView>
