@@ -8,6 +8,7 @@ import DishDetailsScreen from "../screens/DishDetailsScreen";
 import Cart from "../screens/CartScreen";
 import OrderScreen from "../screens/OrdersScreen";
 import OrderDetails from "../screens/OrderDetails";
+import ProfileScreen from '../screens/ProfileScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +48,7 @@ const HomeTabs = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={HomeScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="user-alt" size={24} color={color} />
