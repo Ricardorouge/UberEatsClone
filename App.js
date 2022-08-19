@@ -5,6 +5,7 @@ import RestaurantDetailsScreen from "./src/screens/RestaurantDetailsScreen";
 import DishDetailsScreen from "./src/screens/DishDetailsScreen";
 import Cart from "./src/screens/CartScreen";
 import OrderScreen from "./src/screens/OrdersScreen";
+import OrderDetails from "./src/screens/OrderDetails";
 export default function App() {
   return (
     <View style={styles.container}>
@@ -12,7 +13,8 @@ export default function App() {
       {/* <RestaurantDetailsScreen /> */}
       {/* <DishDetailsScreen/> */}
       {/* <Cart/> */}
-      <OrderScreen/>
+      {/* <OrderScreen/> */}
+      <OrderDetails/>
       <StatusBar style="auto" />
     </View>
   );

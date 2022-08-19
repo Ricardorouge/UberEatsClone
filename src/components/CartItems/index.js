@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         marginRight:10,
         paddingVertical:2,
         borderRadius:3,
+        
       },
       total:{
         marginLeft:'auto',

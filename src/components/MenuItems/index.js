@@ -10,7 +10,7 @@ const MenuItems = (props) => {
           {" "}
           {dish.description}
         </Text>
-        <Text style={styles.price}> ${dish.price}</Text>
+        <Text style={styles.price}> ${(dish.price).toFixed(2)}</Text>
       </View>
       {dish.image && (
         <Image source={{ uri: dish.image }} style={styles.image} />
