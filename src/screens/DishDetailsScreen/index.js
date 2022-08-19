@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const dish = restaurants[0].dishes[0];
 
-const DishDetailsScreen = () => {
+const DishDetailsScreen = (props) => {
   const [quantity, setQuantity] = useState(1);
 
   const addItem = () => {

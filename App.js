@@ -3,12 +3,14 @@ import { StyleSheet, View } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 import RestaurantDetailsScreen from "./src/screens/RestaurantDetailsScreen";
 import DishDetailsScreen from "./src/screens/DishDetailsScreen";
+import Cart from "./src/screens/Cart";
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <HomeScreen /> */}
       {/* <RestaurantDetailsScreen /> */}
-      <DishDetailsScreen/>
+      {/* <DishDetailsScreen/> */}
+      <Cart/>
       <StatusBar style="auto" />
     </View>
   );
