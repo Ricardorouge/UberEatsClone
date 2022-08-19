@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
+
 const RestaurantItem = (props) => {
   const { restaurant } = props;
   
@@ -14,7 +16,7 @@ const RestaurantItem = (props) => {
     <Pressable onPress={onPress} style={styles.restaurantContainer}>
       <Image
         source={{
-          uri: restaurant.image,
+          uri: restaurant.image.startsWith('http')? restaurant.image : DEFAULT_IMAGE,
         }}
         style={styles.image}
       />
@@ -22,12 +24,12 @@ const RestaurantItem = (props) => {
         <View>
           <Text style={styles.title}>{restaurant.name}</Text>
           <Text style={styles.subtitle}>
-            {restaurant.deliveryFee} &#8226; {restaurant.minDeliveryTime}-
-            {restaurant.maxDeliveryTime}
+            {(restaurant.deliveryFee).toFixed(1)} &#8226; {restaurant.minDeliveryTime}-
+            {restaurant.maxDeliveryTime} minutes
           </Text>
         </View>
         <View style ={styles.rating}>
-            <Text>{restaurant.rating}</Text>
+            <Text>{(restaurant.rating).toFixed(1)}</Text>
         </View>
       </View>
     </Pressable>
