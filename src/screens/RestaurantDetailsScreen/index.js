@@ -17,13 +17,13 @@ const RestaurantDetailsScreen = () => {
   const route = useRoute();
   const id = route.params.id;
 
-  useEffect(() => {
-    DataStore.query(Restaurant, id).then(setRestaurant);
+  useEffect(() => {if(id)
+   { DataStore.query(Restaurant, id).then(setRestaurant);
 
     DataStore.query(Dish, (dish) => dish.restaurantID("eq", id)).then(
       setDishes
-    );
-  }, []);
+    );}
+  }, [id]);
 
   const navigation = useNavigation();
 
