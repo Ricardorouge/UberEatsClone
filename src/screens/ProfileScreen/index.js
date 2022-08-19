@@ -1,6 +1,7 @@
 import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Auth } from "aws-amplify";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -39,6 +40,8 @@ const Profile = () => {
         style={styles.input}
       />
       <Button onPress={onSave} title="Save" />
+      <Text onPress={()=>Auth.signOut()} style = {styles.signOut}>Sign Out</Text>
+
     </SafeAreaView>
   );
 };
@@ -55,6 +58,14 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     borderRadius: 5,
+  },
+  signOut:{
+    textAlign:'center',
+    color:'white',
+    marginTop:5,
+    padding:10,
+    backgroundColor:'red',
+    
   },
 });
 

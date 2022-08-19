@@ -9,7 +9,7 @@ import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
 
 import config from "./src/aws-exports";
 
-Amplify.configure(config);
+Amplify.configure({ ...config, Analytics: { disabled: true } });
 
 function App() {
   return (
@@ -22,4 +22,4 @@ function App() {
 
 const styles = StyleSheet.create({});
 
-export default withAuthenticator(App)
+export default withAuthenticator(App);
