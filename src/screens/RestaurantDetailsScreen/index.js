@@ -1,6 +1,7 @@
 import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import restaurants from "../../../assets/data/restaurants.json";
+import MenuItems from "../../components/MenuItems";
 
 const restaurant = restaurants[0];
 
@@ -27,6 +28,7 @@ const RestaurantDetailsScreen = () => {
           {restaurant.maxDeliveryTime} minutes
         </Text>
       </View>
+      <MenuItems dish ={restaurant.dishes[0]}/>
     </View>
   );
 };
