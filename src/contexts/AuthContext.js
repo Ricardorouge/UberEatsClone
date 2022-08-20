@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import { Alert } from "react-native";
 import { Auth, DataStore } from "aws-amplify";
 import { User } from "../models";
 
@@ -13,10 +14,17 @@ const AuthContextProvider = ({ children }) => {
     Auth.currentAuthenticatedUser({ bypassCache: true }).then(setAuthUser);
   }, []);
 
+  const fetchUser = async ()=>{
+    try{
+
+      const results = await DataStore.query(User,(user)=>user.sub('eq',sub))
+      setDbUser(results[0])
+    }catch(err){
+      Alert.alert('Error',error.message)
+    }
+  }
   useEffect(() => {
-    DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
-      setDbUser(users[0])
-    );
+   fetchUser()
   }, [sub]);
 
   return (
